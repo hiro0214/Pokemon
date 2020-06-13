@@ -1,0 +1,15 @@
+.gameboy {
+  width: 540px;
+  height: 800px;
+  margin: 10px auto 0;
+  background: #d4cfc9;
+  box-shadow: 0 0 6px 4px #b4b4b4 inset;
+  border: 1px solid #b4b4b4;
+  border-radius: 10px 10px 80px 10px;
+  &__display {
+    width: 440px;
+    height: 320px;
+    margin: 60px auto 0;
+    background: #000;
+  }
+}

@@ -1,0 +1,53 @@
+@mixin backgroundImage($url) {
+  background-image: url($image_path + $url);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+}
+
+@mixin font($size, $lineheight: null, $bold: null) {
+  font-size: $size + px;
+  font-size: ($size / 10) + rem;
+  line-height: $lineheight;
+  font-weight: $bold;
+}
+
+@mixin nthMargin($n, $margin) {
+  &:nth-of-type(n+#{$n}) {
+    margin-top: $margin;
+  }
+}
+
+@mixin circleSize($size) {
+  width: $size + px;
+  height: $size + px;
+  @include borderRadius(50%);
+}
+
+@mixin borderRadius($size: 20px) {
+  border-radius: $size;
+}
+
+@mixin btnArrow($url) {
+  content: url($image_path + $url);
+  position: absolute;
+  top: 50%;
+  margin-top: -0.5em;
+}
+
+@mixin rowCenter {
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+@mixin positionCenter {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
