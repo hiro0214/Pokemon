@@ -4,6 +4,7 @@ html {
 
 body {
   @include font(16);
+  background: #646464;
   font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Hiragino Sans", "ヒラギノ角ゴシック", sans-serif;
 }
 

@@ -2,5 +2,16 @@ extends /_include/_layout.pug
 
 block content
   .gameboy
-    button#btn ボタン
-    #textBox.gameboy__display
+    .gameboy__display
+      .gameboy__screen
+    .gameboy__key
+      .gameboy__key--top
+      .gameboy__key--left
+      .gameboy__key--center
+      .gameboy__key--right
+      .gameboy__key--bottom
+    .gameboy__btn
+      button.btnA
+        span A
+      button.btnB
+        span B
