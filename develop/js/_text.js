@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.textWindow = function (text) {
+exports["default"] = (function (text) {
     var msg_buff = '';
     function message(msg) {
         if (msg_buff == '') {
@@ -30,4 +30,4 @@ exports.textWindow = function (text) {
     }
     document.getElementById('textBox').innerHTML = "";
     message(text);
-};
+});

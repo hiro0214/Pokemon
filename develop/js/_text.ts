@@ -1,4 +1,4 @@
-export const textWindow = (text) => {
+export default (text) => {
   var msg_buff = '';
   function message(msg)
   {

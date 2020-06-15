@@ -1,0 +1,29 @@
+[
+  {
+    "name": "ピカチュウ",
+    "hp": 200,
+    "attack": 100,
+    "deffence": 60,
+    "speed": 70,
+    "spAtk": 70,
+    "spDef": 55
+  },
+  {
+    "name": "フシギバナ",
+    "hp": 240,
+    "attack": 120,
+    "deffence": 70,
+    "speed": 30,
+    "spAtk": 50,
+    "spDef": 65
+  },
+  {
+    "name": "リザードン",
+    "hp": 230,
+    "attack": 120,
+    "deffence": 70,
+    "speed": 40,
+    "spAtk": 65,
+    "spDef": 60
+  }
+]

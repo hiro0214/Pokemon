@@ -1,27 +1,42 @@
-import { textWindow } from './_text';
+const pokemonData = require('./data.json')
+import textWindow from './_text';
 import Pokemon from './_class';
+import * as btn from "./_btn";
+
 
 document.addEventListener('DOMContentLoaded', () => {
-  btnInit()
+  genaratePoke()
+  changeURL()
+  btn.btnClick()
+  btn.keyAction()
 })
 
-const btnInit = () => {
-  document.querySelector('.btnA').onclick = () => {
-    alert('Aボターン!')
+const genaratePoke = () => {
+  const args = Object.values(pokemonData[0])
+  const poke1 = new Pokemon(...args)
+  console.log(poke1);
+}
+
+const changeURL = () => {
+  let str;
+  const num = Math.floor(Math.random() * (7 - 1)) + 1
+  if (num === 1) {
+    str = "▴(｡◕ᴥ◕｡)▴"
   }
-  document.querySelector('.btnB').onclick = () => {
-    alert('Bボターン!')
+  else if (num === 2) {
+    str = "⟅̀⁍̃◡⁌̃⟆́"
   }
-  document.querySelector('.gameboy__key--top').onclick = () => {
-    alert('うえー')
+  else if (num === 3) {
+    str = "ˆ⁍◡⁌ˆ"
   }
-  document.querySelector('.gameboy__key--left').onclick = () => {
-    alert('ひだりー')
+  else if (num === 4) {
+    str = "⧫(◕ˑ̫◕)⧫"
   }
-  document.querySelector('.gameboy__key--right').onclick = () => {
-    alert('みぎー')
+  else if (num === 5) {
+    str = "⊃(◎)⊂"
   }
-  document.querySelector('.gameboy__key--bottom').onclick = () => {
-    alert('したー！')
+  else if (num === 6) {
+    str = "╰(◕o◕)╮_=͟͟͞͞◒"
   }
+  history.replaceState('', '', str)
 }
