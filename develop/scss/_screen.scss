@@ -1,0 +1,33 @@
+.trick {
+  display: inline-block;
+  padding: 0 10px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 5px;
+  li {
+    position: relative;
+    padding-left: 1em;
+    margin: 10px 0;
+    &.current {
+      &::before {
+        content: "\0025b6\00fe0e";
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+}
+
+.textbox {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  width: calc(100% - 12px);
+  height: 100px;
+  padding: 6px 20px;
+  @include font(21, 2);
+  letter-spacing: 4px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 5px;
+}

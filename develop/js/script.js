@@ -1,5 +1,5 @@
 const pokemonData = require('./data.json')
-import textWindow from './_text';
+// import textWindow from './_text';
 import Pokemon from './_class';
 import * as btn from "./_btn";
 

@@ -1,3 +1,5 @@
+import textWindow from './_text';
+
 export const btnClick = () => {
   document.querySelector('.gameboy__key--up').onclick = () => {
     btnUpAction()
@@ -43,7 +45,13 @@ export const keyAction = () => {
 }
 
 const btnUpAction = () => {
-  console.log('up')
+  const list = document.querySelector('.current')
+  list.classList.remove('current')
+  if (list.previousElementSibling) {
+    list.previousElementSibling.classList.add('current')
+  } else {
+    document.querySelector('.trick').lastElementChild.classList.add('current')
+  }
 }
 
 const btnLeftAction = () => {
@@ -55,11 +63,18 @@ const btnRightAction = () => {
 }
 
 const btnDownAction = () => {
-  console.log('down')
+  const list = document.querySelector('.current')
+  list.classList.remove('current')
+  if (list.nextElementSibling) {
+    list.nextElementSibling.classList.add('current')
+  } else {
+    document.querySelector('.trick').firstElementChild.classList.add('current')
+  }
 }
 
 const btnAAction = () => {
-  console.log('A')
+  const current = document.getElementsByClassName('current')[0]
+  textWindow(`リザードンの\n${current.textContent}!`)
 }
 
 const btnBAction = () => {

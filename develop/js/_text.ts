@@ -25,7 +25,7 @@ export default (text) => {
     // }
     document.getElementById('textBox').innerHTML += c;
     msg_buff = msg_buff.slice(1);
-    setTimeout(() => message_char(), 35);
+    setTimeout(() => message_char(), 45);
   }
 
   document.getElementById('textBox').innerHTML = ""
