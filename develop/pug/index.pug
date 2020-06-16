@@ -4,12 +4,32 @@ block content
   .gameboy
     .gameboy__display
       .gameboy__screen
+        .status-block.enemy-block(state="ball")
+          ul#enemyBall
+            - for (var i = 0; i < 6; i ++)
+              li.show
+          .pokemon-content#enemy
+            .pokemon-content__name ピカチュウ
+            .pokemon-content__lv 50
+            .pokemon-content__gauge
+        .status-block.player-block(state="status")
+          ul#playerBall
+            - for (var i = 0; i < 6; i ++)
+              li.show
+          .pokemon-content#player
+            .pokemon-content__name リザードン
+            .pokemon-content__lv 50
+            .pokemon-content__gauge
+              .pokemon-content__gauge--min 90
+              .pokemon-content__gauge--max 110
+
         ul.trick
           li.current だいもんじ
           li かえんほうしゃ
           li きりさく
           li つばさでうつ
         #textBox.textbox
+
     .gameboy__key
       .gameboy__key--up
       .gameboy__key--left

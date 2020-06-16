@@ -29,5 +29,6 @@ export default (text) => {
   }
 
   document.getElementById('textBox').innerHTML = ""
+  document.getElementById('textBox').style.opacity = "1"
   message(text)
 }
