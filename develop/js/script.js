@@ -1,18 +1,26 @@
 const pokemonData = require('./data.json')
+const trick = require('./trick.json')
 // import textWindow from './_text';
 import Pokemon from './_class';
 import * as btn from "./_btn";
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  genaratePoke()
+  generatePoke()
   changeURL()
   btn.btnClick()
   btn.keyAction()
+  changeDisplay()
 })
 
-const genaratePoke = () => {
-  const args = Object.values(pokemonData[0])
+const generatePoke = () => {
+  let poke = pokemonData[0]
+  let trickData = poke.tricks
+  trickData.map((i) => {
+    trickData[i] = trick[i]
+  })
+  poke.tricks = trickData
+  let args = Object.values(poke)
   const poke1 = new Pokemon(...args)
   console.log(poke1);
 }
@@ -39,4 +47,17 @@ const changeURL = () => {
     str = "╰(◕o◕)╮_=͟͟͞͞◒"
   }
   history.replaceState('', '', str)
+}
+
+const changeDisplay = () => {
+  document.getElementById('change').onclick = () => {
+    const status = document.querySelectorAll('.status-block')
+    Array.prototype.forEach.call(status, (ele) => {
+      if (ele.getAttribute('state') === "ball") {
+        ele.setAttribute('state', 'status')
+      } else {
+        ele.setAttribute('state', 'ball')
+      }
+    })
+  }
 }

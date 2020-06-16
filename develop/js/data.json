@@ -3,27 +3,36 @@
     "name": "ピカチュウ",
     "hp": 200,
     "attack": 100,
-    "deffence": 60,
+    "defense": 60,
     "speed": 70,
     "spAtk": 70,
-    "spDef": 55
+    "spDef": 55,
+    "type1": "でんき",
+    "type2": null,
+    "tricks": [0, 1, 2, 3]
   },
   {
     "name": "フシギバナ",
     "hp": 240,
     "attack": 120,
-    "deffence": 70,
+    "defense": 70,
     "speed": 30,
     "spAtk": 50,
-    "spDef": 65
+    "spDef": 65,
+    "type1": "くさ",
+    "type2": "どく",
+    "tricks": [0, 1, 2, 3]
   },
   {
     "name": "リザードン",
     "hp": 230,
     "attack": 120,
-    "deffence": 70,
+    "defense": 70,
     "speed": 40,
     "spAtk": 65,
-    "spDef": 60
+    "spDef": 60,
+    "type1": "ほのお",
+    "type2": "ひこう",
+    "tricks": [0, 1, 2, 3]
   }
 ]

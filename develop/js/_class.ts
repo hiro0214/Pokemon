@@ -7,10 +7,9 @@ export default class Pokemon {
     public speed: number,
     public spAtk: number,
     public spDef: number,
-    // public trick1: string,
-    // public trick2: string,
-    // public trick3: string,
-    // public trick4: string,
+    public type1: string,
+    public type2: string,
+    public tricks: []
   ) {
 
   }

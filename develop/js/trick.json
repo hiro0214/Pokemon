@@ -1,0 +1,34 @@
+[
+  {
+    "name": "かみなり",
+    "power": 120,
+    "accuracy": 70,
+    "type": "でんき",
+    "effect": "マヒ",
+    "category": "特殊"
+  },
+  {
+    "name": "10万ボルト",
+    "power": 95,
+    "accuracy": 100,
+    "type": "でんき",
+    "effect": "マヒ",
+    "category": "特殊"
+  },
+  {
+    "name": "スピードスター",
+    "power": 60,
+    "accuracy": 100,
+    "type": "ノーマル",
+    "effect": null,
+    "category": "物理"
+  },
+  {
+    "name": "でんこうせっか",
+    "power": 40,
+    "accuracy": 90,
+    "type": "ノーマル",
+    "effect": "マヒ",
+    "category": "物理"
+  }
+]
