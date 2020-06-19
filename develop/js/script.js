@@ -1,6 +1,6 @@
-const pokemonData = require('./data.json')
-const trick = require('./trick.json')
-// import textWindow from './_text';
+const pokemonData = require('../json/data.json')
+const trick = require('../json/trick.json')
+import textWindow from './_text';
 import Pokemon from './_class';
 import * as btn from "./_btn";
 
@@ -13,12 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
   changeDisplay()
 })
 
+const getTrick = id => trick[id];
+
 const generatePoke = () => {
-  let poke = pokemonData[0]
-  let trickData = poke.tricks
-  trickData.map((i) => {
-    trickData[i] = trick[i]
-  })
+  let
+    trickData = [],
+    poke = pokemonData[0]
+  for(let i in poke.tricks) {
+    trickData.push(getTrick(i))
+  }
   poke.tricks = trickData
   let args = Object.values(poke)
   const poke1 = new Pokemon(...args)
