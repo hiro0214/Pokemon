@@ -22,6 +22,8 @@ const
     js: 'js/',
     img: 'images/',
     fonts: 'fonts/',
+    audio: 'audio/',
+    json: 'json/',
     // initialsetting: 'initialsetting/',
   };
 
@@ -195,6 +197,16 @@ const
         {
           from: path.resolve(__dirname, paths.src + paths.fonts),
           to: path.resolve(__dirname, paths.dest + paths.assets + paths.fonts)
+        },
+        // audio
+        {
+          from: path.resolve(__dirname, paths.src + paths.audio),
+          to: path.resolve(__dirname, paths.dest + paths.assets + paths.audio)
+        },
+        // json
+        {
+          from: path.resolve(__dirname, paths.src + paths.json),
+          to: path.resolve(__dirname, paths.dest + paths.assets + paths.json)
         },
       ]),
       new ImageminWebpackPlugin({

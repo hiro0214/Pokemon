@@ -5,4 +5,19 @@ html(lang="ja")
   body
     main.main
       .container
-        block content
+        .gameboy
+          .gameboy__display
+            button#change 表示切り替え
+            .gameboy__screen
+              block screen
+          .gameboy__key
+            .gameboy__key--up
+            .gameboy__key--left
+            .gameboy__key--center
+            .gameboy__key--right
+            .gameboy__key--down
+          .gameboy__btn
+            button.btnB
+            span.gameboy__btn--B B
+            button.btnA
+            span.gameboy__btn--A A

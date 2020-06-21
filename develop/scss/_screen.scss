@@ -63,6 +63,10 @@
   }
   .pokemon-content {
     top: -15px;
+    &__img {
+      top: -20px;
+      left: 300px;
+    }
   }
 }
 
@@ -77,6 +81,10 @@
   }
   .pokemon-content {
     top: -30px;
+    &__img {
+      top: -100px;
+      left: -230px;
+    }
     &__gauge {
       &::after {
         content: "\002f";
@@ -98,6 +106,13 @@
     width: 140px;
     @include font(22);
     padding-left: 0.5em;
+  }
+  &__img {
+    position: absolute;
+    width: 180px;
+    img {
+      width: 100%;
+    }
   }
   &__lv {
     display: inline-block;

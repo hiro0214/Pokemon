@@ -1,44 +1,32 @@
 extends /_include/_layout.pug
 
-block content
-  .gameboy
-    .gameboy__display
-      button#change 表示切り替え
-      .gameboy__screen
-        .status-block.enemy-block(state="ball")
-          ul#enemyBall
-            - for (var i = 0; i < 6; i ++)
-              li.show
-          .pokemon-content#enemy
-            .pokemon-content__name ピカチュウ
-            .pokemon-content__lv 50
-            .pokemon-content__gauge
-        .status-block.player-block(state="status")
-          ul#playerBall
-            - for (var i = 0; i < 6; i ++)
-              li.show
-          .pokemon-content#player
-            .pokemon-content__name リザードン
-            .pokemon-content__lv 50
-            .pokemon-content__gauge
-              .pokemon-content__gauge--min 90
-              .pokemon-content__gauge--max 110
+block screen
+  .status-block.enemy-block(state="status")
+    ul#enemyBall
+      - for (var i = 0; i < 6; i ++)
+        li.show
+    .pokemon-content#enemy
+      .pokemon-content__name ピカチュウ
+      .pokemon-content__img
+        img(src="./assets/images/pikachuu_f.png")
+      .pokemon-content__lv 50
+      .pokemon-content__gauge
+  .status-block.player-block(state="status")
+    ul#playerBall
+      - for (var i = 0; i < 6; i ++)
+        li.show
+    .pokemon-content#player
+      .pokemon-content__name リザードン
+      .pokemon-content__img
+        img(src="./assets/images/riza-don_b.png")
+      .pokemon-content__lv 50
+      .pokemon-content__gauge
+        .pokemon-content__gauge--min 90
+        .pokemon-content__gauge--max 110
 
-        ul.trick
-          li.current だいもんじ
-          li かえんほうしゃ
-          li きりさく
-          li つばさでうつ
-        #textBox.textbox
-
-    .gameboy__key
-      .gameboy__key--up
-      .gameboy__key--left
-      .gameboy__key--center
-      .gameboy__key--right
-      .gameboy__key--down
-    .gameboy__btn
-      button.btnB
-      span.gameboy__btn--B B
-      button.btnA
-      span.gameboy__btn--A A
+  ul.trick
+    li.current だいもんじ
+    li かえんほうしゃ
+    li きりさく
+    li つばさでうつ
+  #textBox.textbox
