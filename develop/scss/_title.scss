@@ -1,0 +1,15 @@
+.title {
+  text-align: center;
+  h1 {
+    margin-top: 40px;
+    @include font(50, 1.5);
+    color: green;
+    transform: translateX(100%);
+    @include animation(title-fadeIn, .6s);
+    &::after {
+      content: 'POCKET MONSTERS';
+      color: red;
+      @include font(30);
+    }
+  }
+}

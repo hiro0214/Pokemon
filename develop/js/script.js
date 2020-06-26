@@ -3,29 +3,17 @@ const trick = require("../json/trick.json");
 import textWindow from "./_text";
 import Pokemon from "./_class";
 import * as btn from "./_btn";
+import * as frame from "./_frame";
 
 document.addEventListener("DOMContentLoaded", () => {
   changeURL();
   btn.btnClick();
   btn.keyAction();
-  changeDisplay();
 
   // bgmLoop()
+  globalVariable()
   conditionalBranch();
 });
-
-const changeDisplay = () => {
-  document.getElementById("change").onclick = () => {
-    const status = document.querySelectorAll(".status-block");
-    Array.prototype.forEach.call(status, (ele) => {
-      if (ele.getAttribute("state") === "ball") {
-        ele.setAttribute("state", "status");
-      } else {
-        ele.setAttribute("state", "ball");
-      }
-    });
-  };
-};
 
 
 
@@ -46,7 +34,9 @@ let
     pokemon: [],
   };
 
-
+const globalVariable = () => {
+  screen = document.getElementById('screen')
+}
 
 /* ==========================
   Function Definition
@@ -57,13 +47,21 @@ const
   addClass = (tar, className) => document.getElementById(tar).classList.add(className),
   removeClass = (tar, className) => document.getElementById(tar).classList.remove(className),
 
+  generateStar = (color, i, left) => {
+    const ele = document.createElement('div')
+    ele.classList.add('star')
+    ele.style.borderBottom = `10px solid ${color}`;
+    ele.style.left = `${left + (i * 70)}px`
+    return ele;
+  },
+
   getTrick = id => trick[id],
   generatePoke = id => {
     let trickData = [],
       poke = pokemonData[id];
-    for (let i in poke.tricks) {
+    poke.tricks.forEach((i) => {
       trickData.push(getTrick(i));
-    }
+    })
     poke.tricks = trickData;
     let args = Object.values(poke);
     return new Pokemon(...args);
@@ -117,13 +115,32 @@ const changeState = state => {
 };
 
 const opening = () => {
-  console.log("opening");
+  screen.innerHTML = frame.openingFrame
 
-  /* ================================
-    Some kind of opening processing
-  ================================= */
+  const
+    target = document.getElementById('starPos'),
+    color = ["#f3a68c", "#79c06e", "#ffe9a9", "#8da0b6"],
+    delay = 5500,
+    left = 130;
 
-  changeState("title");
+  for (let i in color) {
+    for (let j = 0; j < 9; j ++) {
+      const
+        star = generateStar(color[i], i, left),
+        time = delay + (j * 140);
+
+      setTimeout(() => {
+        j >= 5 ? j -= 3 : j;
+        let pos = parseInt(star.style.left) + (j * 10)
+        star.style.left = pos + "px"
+        target.appendChild(star)
+      }, time)
+    }
+  }
+
+  setTimeout(() => {
+    changeState("title");
+  }, 23000)
 };
 
 const title = () => {
@@ -133,7 +150,9 @@ const title = () => {
     Some kind of title processing
   ================================= */
 
-  changeState("field");
+  screen.innerHTML = frame.titleFrame
+
+  // changeState("field");
 };
 
 const field = () => {
@@ -143,7 +162,9 @@ const field = () => {
     Some kind of field processing
   ================================= */
 
-  changeState("battleBefore");
+  screen.innerHTML = frame.fieldFrame
+
+  // changeState("battleBefore");
 };
 
 const battleBefore = () => {
@@ -157,6 +178,8 @@ const battleBefore = () => {
   console.log(player.pokemon);
   enemy.pokemon = generatePoke(2);
   console.log(enemy.pokemon);
+
+  screen.innerHTML = frame.battleFrame
 
   changeState("battle");
 };

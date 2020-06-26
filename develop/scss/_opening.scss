@@ -1,0 +1,96 @@
+.opening {
+  @include animation(opening-fadeOut, 1.2s, 20s);
+  &__text {
+    @include positionCenter;
+    width: 380px;
+    height: 162px;
+    @include animation(opening-text, 3s);
+    p {
+      position: relative;
+      @include font(18, 3.0, bold);
+      padding-left: 1em;
+      letter-spacing: -1px;
+      &::before {
+        content: "\00a9";
+        position: absolute;
+        top: 6px;
+        left: 0;
+      }
+    }
+  }
+  &__top-band, &__bottom-band {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 100px;
+    @include animation(opening-band, .1s, 3s);
+  }
+  &__bottom-band {
+    bottom: 0;
+  }
+  &__logo {
+    @include positionCenter;
+    height: 120px;
+    text-align: center;
+    @include animation(opening-fadeOut, .1s, 8.4s);
+    img {
+      width: 40px;
+      @include animation(opening-fadeIn, .1s, 4.2s);
+    }
+    p {
+      @include font(30);
+      @include multipleAnimation(opening-fadeIn .1s 4.2s, opening-color .5s 4.6s);
+      &::after {
+        content: "PRESENTS";
+        display: block;
+        margin-top: 10px;
+        @include font(20);
+        @include animation(opening-fadeIn, .1s, 7.8s);
+      }
+    }
+    .star {
+      $width: 10px;
+      $rotate: 67deg;
+      @include star($width, $rotate);
+      top: 120px;
+      left: 130px;
+      @include animation(star, 1.1s);
+    }
+  }
+  &__star {
+    $width: 30px;
+    $rotate: 63deg;
+    @include star($width, $rotate);
+    top: -40px;
+    right: 0;
+    z-index: 10;
+    @include animation(star-icon, .6s, 4.2s);
+    &::before, &::after {
+      top: -4px;
+    }
+  }
+  &__battle {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    height: 300px;
+    .back, .front {
+      position: absolute;
+      bottom: 0;
+      visibility: hidden;
+    }
+    .back {
+      z-index: 1;
+      left: 70px;
+      width: 200px;
+      @include animation(opening-back, 10s, 9.2s);
+    }
+    .front {
+      bottom: -20px;
+      z-index: 0;
+      left: 300px;
+      width: 150px;
+      @include animation(opening-front, 10s, 9.2s);
+    }
+  }
+}

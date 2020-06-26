@@ -1,9 +1,11 @@
 @import
-  "_reset.scss",
-  "_font.scss",
-  "_variable.scss",
-  "_mixin.scss",
-  "_base.scss",
-  "_keyframes.scss",
+  "./foundation/_reset.scss",
+  "./foundation/_font.scss",
+  "./foundation/_variable.scss",
+  "./foundation/_mixin.scss",
+  "./foundation/_base.scss",
+  "./foundation/_keyframes.scss",
   "_display.scss",
+  "_opening.scss",
+  "_title.scss",
   "_screen.scss";

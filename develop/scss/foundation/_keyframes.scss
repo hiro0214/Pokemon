@@ -1,0 +1,194 @@
+/* =====================
+  Opening keyframes
+======================= */
+
+@keyframes opening-text {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes opening-band {
+  100% {
+    background: #000;
+  }
+}
+
+@keyframes opening-fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes opening-fadeOut {
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes opening-color {
+  20%, 100% {
+    color: #000;
+  }
+  21%, 59% {
+    color: #caca00;
+  }
+  60%, 99% {
+    color: #666600;
+  }
+}
+
+@keyframes star-icon {
+  0% {
+    border-bottom: solid 30px #faee46;
+    transform: rotate(180deg) translate3d(0, 0, 0);
+  }
+  64%, 71% {
+    border-bottom: solid 30px #faee46;
+  }
+  65%, 70% {
+    border-bottom: solid 30px #ef857d;
+  }
+  100% {
+    border-bottom: solid 30px #faee46;
+    transform: rotate(180deg) translate3d(490px, -560px, 0);
+  }
+}
+
+@keyframes star {
+  0% {
+    transform: rotate(180deg) translateY(0);
+    opacity: 0;
+  }
+  10%, 30%, 50%, 70%, 90% {
+    opacity: 1;
+  }
+  20%, 40%, 60%, 80% {
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(180deg) translateY(-100px);
+    opacity: 0;
+  }
+}
+
+@keyframes opening-back {
+  0% {
+    content: url("../images/opening/op-b_1.png");
+    visibility: hidden;
+    transform: translateX(300px);
+  }
+  13%, 39% {
+    content: url("../images/opening/op-b_1.png");
+    transform: translateX(0);
+  }
+  40%, 47.9% {
+    content: url("../images/opening/op-b_2.png");
+    transform: translateX(-20px);
+  }
+  48% {
+    content: url("../images/opening/op-b_3.png");
+    transform: translateX(-20px);
+  }
+  50%, 60% {
+    transform: translateX(40px);
+  }
+  62% {
+    content: url("../images/opening/op-b_3.png");
+    transform: translateX(0);
+  }
+  63%, 100% {
+    content: url("../images/opening/op-b_1.png");
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
+
+@keyframes opening-front{
+  0% {
+    content: url("../images/opening/op-f_1.png");
+    visibility: hidden;
+    transform: translate3d(-300px, 0, 0);
+  }
+  13% {
+    transform: translate3d(0, 0, 0);
+  }
+  15%, 28% {
+    transform: translate3d(15px, -10px, 0);
+  }
+  17%, 30% {
+    transform: translate3d(30px, 0, 0);
+  }
+  19%, 32% {
+    transform: translate3d(15px, -10px, 0);
+  }
+  21%, 26%, 34% {
+    transform: translate3d(0, 0, 0);
+  }
+  47.9% {
+    content: url("../images/opening/op-f_1.png");
+  }
+  48% {
+    content: url("../images/opening/op-f_2.png");
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(20px, -40px, 0);
+  }
+  52%, 64% {
+    content: url("../images/opening/op-f_2.png");
+    transform: translate3d(40px, 0, 0);
+  }
+  65%, 73% {
+    content: url("../images/opening/op-f_1.png");
+    transform: translate3d(40px, 0, 0);
+  }
+  67%, 71% {
+    transform: translate3d(20px, -10px, 0);
+  }
+  69% {
+    transform: translate3d(0, 0, 0);
+  }
+  77% {
+    content: url("../images/opening/op-f_1.png");
+    transform: translate3d(40px, 0, 0);
+  }
+  79%, 90.9% {
+    content: url("../images/opening/op-f_2.png");
+    transform: translate3d(40px, 20px, 0);
+  }
+  91% {
+    content: url("../images/opening/op-f_3.png");
+    width: 150px;
+  }
+  96%, 100% {
+    content: url("../images/opening/op-f_3.png");
+    width: 170px;
+    visibility: visible;
+    transform: translate3d(-130px, -60px, 0);
+  }
+}
+
+
+
+/* ======================
+  Title keyframes
+======================== */
+
+@keyframes title-fadeIn {
+  100% {
+    transform: translateX(0);
+  }
+}

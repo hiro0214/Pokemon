@@ -52,6 +52,17 @@
   bottom: 0;
 }
 
+@mixin animation($name, $dur, $delay: null) {
+  animation-name: $name;
+  animation-duration: $dur;
+  animation-delay: $delay;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+@mixin multipleAnimation($animation1, $animation2) {
+  animation: $animation1 both, $animation2 both;
+}
 
 @mixin boxBorder {
   border: double 7px #000;
@@ -59,3 +70,32 @@
   box-shadow: inset 0px 2px 1px 1.5px #000, 0px 2px 0px 1.5px #000;
 }
 
+
+@mixin star($width, $deg) {
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: $width solid transparent;
+  border-right: $width solid transparent;
+  border-bottom: $width solid transparent;
+  transform: rotate(180deg);
+  &::before, &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -$width;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: inherit;
+    border-right: inherit;
+    border-bottom: inherit;
+  }
+  &::before {
+    transform: rotate($deg);
+  }
+  &::after {
+    transform: rotate(-$deg);
+  }
+}
