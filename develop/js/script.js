@@ -22,8 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 =========================== */
 
 let
-  gameState = "opening",
-  winner = "player",
+  gameState = "battleBefore",
 
   player = {
     name: "サトシ",
@@ -91,7 +90,6 @@ const
     }
     history.replaceState("", "", str);
   };
-
 
 
 /* ==========================
@@ -181,24 +179,30 @@ const battleBefore = () => {
 
   screen.innerHTML = frame.battleFrame
 
-  changeState("battle");
-};
-
-const battleProcess = () => {
   console.log(`${enemy.name}が\nしょうぶを　しかけてきた！`);
-
   console.log(`${player.name}は\n${player.pokemon.name}を　くりだした！`);
   console.log(`${enemy.name}は\n${enemy.pokemon.name}を　くりだした！`);
 
-  /* ================================
-    Some kind of battle processing
-  ================================= */
+  changeState("battle");
+};
 
-  if (winner == "player") {
+export const battleProcess = (trick) => {
+  if (!trick) {
+    // command()
+    return;
+  }
+
+  // ダメージ処理
+  // pokemon.attack()
+
+  if (enemy.pokemon.hp <= 0) {
     playerWon();
-  } else {
+  }
+  else if (player.pokemon.hp <= 0){
     playerLost();
   }
+
+  // command()
 };
 
 const playerWon = () => {

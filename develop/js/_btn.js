@@ -1,4 +1,5 @@
 import textWindow from './_text';
+import { battleProcess } from './script';
 
 export const btnClick = () => {
   document.querySelector('.gameboy__key--up').onclick = () => {
@@ -76,6 +77,7 @@ const btnAAction = () => {
   const current = document.getElementsByClassName('current')[0]
   current.parentNode.style.opacity = "0"
   textWindow(`リザードンの\n${current.textContent}!`)
+  battleProcess(current.textContent)
   setTimeout(() => {
     current.parentNode.style.opacity = "1"
     document.getElementById('textBox').style.opacity = "0"
