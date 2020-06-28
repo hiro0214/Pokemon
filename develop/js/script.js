@@ -1,5 +1,5 @@
 const pokemonData = require("../json/data.json");
-const trick = require("../json/trick.json");
+const trickData = require("../json/trick.json");
 import textWindow from "./_text";
 import Pokemon from "./_class";
 import * as btn from "./_btn";
@@ -11,10 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   btn.keyAction();
 
   // bgmLoop()
-  globalVariable()
+  globalVariable();
   conditionalBranch();
 });
-
 
 
 /* ==========================
@@ -23,6 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let
   gameState = "battleBefore",
+
+  playerArea,
+  enemyArea,
+  trickColumn,
 
   player = {
     name: "サトシ",
@@ -33,9 +36,16 @@ let
     pokemon: [],
   };
 
-const globalVariable = () => {
-  screen = document.getElementById('screen')
-}
+const
+  globalVariable = () => {
+    screen = document.getElementById('screen')
+  },
+
+  battleVariable = () => {
+    playerArea = document.getElementById('player')
+    enemyArea = document.getElementById('enemy')
+    trickColumn = document.getElementById('trickColumn')
+  };
 
 /* ==========================
   Function Definition
@@ -54,17 +64,63 @@ const
     return ele;
   },
 
-  getTrick = id => trick[id],
+  getTrick = id => trickData[id],
   generatePoke = id => {
-    let trickData = [],
+    let trickEle = [],
       poke = pokemonData[id];
     poke.tricks.forEach((i) => {
-      trickData.push(getTrick(i));
+      trickEle.push(getTrick(i));
     })
-    poke.tricks = trickData;
+    poke.tricks = trickEle;
     let args = Object.values(poke);
     return new Pokemon(...args);
   },
+
+  generateImg = (name, text) => {
+    const
+      img = document.createElement('img'),
+      path = "./assets/images/";
+
+    if (name == "player") {
+      img.src = `${path + text}_b.png`
+      return img;
+    }
+    else if (name == "enemy") {
+      img.src = `${path + text}_f.png`
+      return img;
+    }
+  },
+
+  insertElement = () => {
+    playerArea.children[0].textContent = player.pokemon.name
+    enemyArea.children[0].textContent = enemy.pokemon.name
+
+    playerArea.children[1].appendChild(generateImg('player', player.pokemon.text))
+    enemyArea.children[1].appendChild(generateImg('enemy', enemy.pokemon.text))
+
+    playerArea.children[3].children[1].textContent = player.pokemon.hp
+
+    player.pokemon.tricks.forEach(ele => {
+      const trickContent = document.createElement('li')
+      trickContent.textContent = ele.name
+      trickColumn.appendChild(trickContent)
+    })
+  },
+
+  commandIn = () => {
+    addClass('trickColumn', 'show')
+    trickColumn.children[0].classList.add('current')
+  },
+  commandOut = i => {
+    removeClass('trickColumn', 'show')
+    trickColumn.children[i].classList.remove('current')
+  },
+
+  textWindowIn = i => {
+    addClass('textBox', 'show')
+    textWindow(`${player.pokemon.name}の\n${player.pokemon.tricks[i].name}!`)
+  },
+  textWindowOut = () => removeClass('textBox', 'show'),
 
   bgmLoop = () => {
     const bgm = new Audio("../audio/battle_loop.mp3")
@@ -166,31 +222,30 @@ const field = () => {
 };
 
 const battleBefore = () => {
-  // ポケモンの選択画面
-  // document.getElementById('decideBtn').onclick = () => {
-  // 決定ボタンを押したら、選択しているポケモンのオブジェクトを作成する
-  // 一通りの処理が出来た後に実装予定
-  // }
-
-  player.pokemon = generatePoke(1);
+  player.pokemon = generatePoke(0);
   console.log(player.pokemon);
-  enemy.pokemon = generatePoke(2);
+  enemy.pokemon = generatePoke(1);
   console.log(enemy.pokemon);
 
   screen.innerHTML = frame.battleFrame
+  battleVariable()
 
   console.log(`${enemy.name}が\nしょうぶを　しかけてきた！`);
   console.log(`${player.name}は\n${player.pokemon.name}を　くりだした！`);
   console.log(`${enemy.name}は\n${enemy.pokemon.name}を　くりだした！`);
 
+  insertElement()
   changeState("battle");
 };
 
-export const battleProcess = (trick) => {
-  if (!trick) {
-    // command()
+export const battleProcess = trickIndex => {
+  if (!trickIndex) {
+    commandIn()
     return;
   }
+
+  commandOut(trickIndex)
+  textWindowIn(trickIndex)
 
   // ダメージ処理
   // pokemon.attack()
@@ -202,7 +257,10 @@ export const battleProcess = (trick) => {
     playerLost();
   }
 
-  // command()
+  setTimeout(() => {
+    commandIn()
+    textWindowOut()
+  }, 2500);
 };
 
 const playerWon = () => {

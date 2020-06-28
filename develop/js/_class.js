@@ -1,8 +1,9 @@
 "use strict";
 exports.__esModule = true;
 var Pokemon = /** @class */ (function () {
-    function Pokemon(name, hp, attack, deffence, speed, spAtk, spDef, type1, type2, tricks) {
+    function Pokemon(name, text, hp, attack, deffence, speed, spAtk, spDef, type1, type2, tricks) {
         this.name = name;
+        this.text = text;
         this.hp = hp;
         this.attack = attack;
         this.deffence = deffence;

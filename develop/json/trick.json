@@ -8,7 +8,7 @@
     "category": "特殊"
   },
   {
-    "name": "10万ボルト",
+    "name": "10まんボルト",
     "power": 95,
     "accuracy": 100,
     "type": "でんき",
@@ -29,6 +29,70 @@
     "accuracy": 90,
     "type": "ノーマル",
     "effect": "マヒ",
+    "category": "物理"
+  },
+  {
+    "name": "ソーラービーム",
+    "power": 120,
+    "accuracy": 100,
+    "type": "くさ",
+    "effect": "2ターン",
+    "category": "特殊"
+  },
+  {
+    "name": "メガドレイン",
+    "power": 40,
+    "accuracy": 100,
+    "type": "くさ",
+    "effect": "吸収",
+    "category": "特殊"
+  },
+  {
+    "name": "はっぱカッター",
+    "power": 55,
+    "accuracy": 95,
+    "type": "くさ",
+    "effect": null,
+    "category": "特殊"
+  },
+  {
+    "name": "のしかかり",
+    "power": 85,
+    "accuracy": 100,
+    "type": "ノーマル",
+    "effect": "マヒ",
+    "category": "物理"
+  },
+  {
+    "name": "だいもんじ",
+    "power": 120,
+    "accuracy": 85,
+    "type": "ほのお",
+    "effect": "やけど",
+    "category": "特殊"
+  },
+  {
+    "name": "かえんほうしゃ",
+    "power": 95,
+    "accuracy": 100,
+    "type": "ほのお",
+    "effect": "やけど",
+    "category": "特殊"
+  },
+  {
+    "name": "きりさく",
+    "power": 70,
+    "accuracy": 100,
+    "type": "ノーマル",
+    "effect": null,
+    "category": "物理"
+  },
+  {
+    "name": "つばさでうつ",
+    "power": 35,
+    "accuracy": 100,
+    "type": "ひこう",
+    "effect": null,
     "category": "物理"
   }
 ]

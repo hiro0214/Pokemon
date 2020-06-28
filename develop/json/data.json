@@ -1,6 +1,7 @@
 [
   {
     "name": "ピカチュウ",
+    "text": "pikachuu",
     "hp": 200,
     "attack": 100,
     "defense": 60,
@@ -13,6 +14,7 @@
   },
   {
     "name": "フシギバナ",
+    "text": "husigibana",
     "hp": 240,
     "attack": 120,
     "defense": 70,
@@ -21,10 +23,11 @@
     "spDef": 65,
     "type1": "くさ",
     "type2": "どく",
-    "tricks": [0, 1, 2, 3]
+    "tricks": [4, 5, 6, 7]
   },
   {
     "name": "リザードン",
+    "text": "riza-don",
     "hp": 230,
     "attack": 120,
     "defense": 70,
@@ -33,6 +36,6 @@
     "spDef": 60,
     "type1": "ほのお",
     "type2": "ひこう",
-    "tricks": [0, 1, 2, 3]
+    "tricks": [8, 9, 10, 11]
   }
 ]

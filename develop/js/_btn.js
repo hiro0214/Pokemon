@@ -75,13 +75,10 @@ const btnDownAction = () => {
 
 const btnAAction = () => {
   const current = document.getElementsByClassName('current')[0]
-  current.parentNode.style.opacity = "0"
-  textWindow(`リザードンの\n${current.textContent}!`)
-  battleProcess(current.textContent)
-  setTimeout(() => {
-    current.parentNode.style.opacity = "1"
-    document.getElementById('textBox').style.opacity = "0"
-  }, 2500)
+
+  // 技リストを決定する時のみのAボタンアクションのif文を後々追加
+  const i = String(Array.prototype.indexOf.call(current.parentNode.querySelectorAll('li'), current))
+  battleProcess(i)
 }
 
 const btnBAction = () => {

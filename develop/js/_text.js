@@ -29,6 +29,5 @@ exports["default"] = (function (text) {
         setTimeout(function () { return message_char(); }, 45);
     }
     document.getElementById('textBox').innerHTML = "";
-    document.getElementById('textBox').style.opacity = "1";
     message(text);
 });

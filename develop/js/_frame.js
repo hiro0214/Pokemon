@@ -47,11 +47,9 @@ export const battleFrame =
     <li class="show"></li>
     <li class="show"></li>
   </ul>
-  <div class="pokemon-content" id="enemy">
-    <div class="pokemon-content__name">ピカチュウ</div>
-    <div class="pokemon-content__img">
-      <img src="./assets/images/pikachuu_f.png" />
-    </div>
+  <div id="enemy" class="pokemon-content">
+    <div class="pokemon-content__name"></div>
+    <div class="pokemon-content__img"></div>
     <div class="pokemon-content__lv">50</div>
     <div class="pokemon-content__gauge"></div>
   </div>
@@ -66,25 +64,17 @@ export const battleFrame =
     <li class="show"></li>
     <li class="show"></li>
   </ul>
-  <div class="pokemon-content" id="player">
-    <div class="pokemon-content__name">リザードン</div>
-    <div class="pokemon-content__img">
-      <img src="./assets/images/riza-don_b.png" />
-    </div>
+  <div id="player" class="pokemon-content">
+    <div class="pokemon-content__name"></div>
+    <div class="pokemon-content__img"></div>
     <div class="pokemon-content__lv">50</div>
     <div class="pokemon-content__gauge">
       <div class="pokemon-content__gauge--min">90</div>
-      <div class="pokemon-content__gauge--max">110</div>
+      <div class="pokemon-content__gauge--max"></div>
     </div>
   </div>
 </div>
 
-<ul class="trick">
-  <li class="current">だいもんじ</li>
-  <li>かえんほうしゃ</li>
-  <li>きりさく</li>
-  <li>つばさでうつ</li>
-</ul>
+<ul id="trickColumn" class="trick"></ul>
 <div class="textbox" id="textBox"></div>
-</div>
 `;

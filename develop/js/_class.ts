@@ -1,6 +1,7 @@
 export default class Pokemon {
   constructor(
     readonly name: string,
+    readonly text: string,
     public hp: number,
     public attack: number,
     public deffence: number,
