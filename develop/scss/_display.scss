@@ -45,6 +45,7 @@
         position: absolute;
         color: #999591;
         @include font(10);
+        pointer-events: none;
       }
     }
     &--up {

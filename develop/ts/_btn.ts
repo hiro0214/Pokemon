@@ -1,45 +1,32 @@
-import textWindow from './_text';
 import { battleProcess } from './script';
 
 export const btnClick = () => {
-  document.querySelector('.gameboy__key--up').onclick = () => {
-    btnUpAction()
-  }
-  document.querySelector('.gameboy__key--left').onclick = () => {
-    btnLeftAction()
-  }
-  document.querySelector('.gameboy__key--right').onclick = () => {
-    btnRightAction()
-  }
-  document.querySelector('.gameboy__key--down').onclick = () => {
-    btnDownAction()
-  }
-  document.querySelector('.btnA').onclick = () => {
-    btnAAction()
-  }
-  document.querySelector('.btnB').onclick = () => {
-    btnBAction()
-  }
+  document.querySelector('.gameboy__key--up').addEventListener('click', btnUpAction)
+  document.querySelector('.gameboy__key--left').addEventListener('click', btnLeftAction)
+  document.querySelector('.gameboy__key--right').addEventListener('click', btnRightAction)
+  document.querySelector('.gameboy__key--down').addEventListener('click', btnDownAction)
+  document.querySelector('.btnA').addEventListener('click', btnAAction)
+  document.querySelector('.btnB').addEventListener('click', btnBAction)
 }
 
 export const keyAction = () => {
   window.addEventListener('keydown', (e) => {
-    if (e.key == "ArrowUp") {
+    if (e.key == 'ArrowUp') {
       btnUpAction()
     }
-    else if (e.key == "ArrowLeft") {
+    else if (e.key == 'ArrowLeft') {
       btnLeftAction()
     }
-    else if (e.key == "ArrowRight") {
+    else if (e.key == 'ArrowRight') {
       btnRightAction()
     }
-    else if (e.key == "ArrowDown") {
+    else if (e.key == 'ArrowDown') {
       btnDownAction()
     }
-    else if (e.key == "a") {
+    else if (e.key == 'a') {
       btnAAction()
     }
-    else if (e.key == "b") {
+    else if (e.key == 'b') {
       btnBAction()
     }
   })

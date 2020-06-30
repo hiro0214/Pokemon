@@ -20,6 +20,7 @@ const
     css: 'css/',
     pug: 'pug/',
     js: 'js/',
+    ts: 'ts/',
     img: 'images/',
     fonts: 'fonts/',
     audio: 'audio/',
@@ -40,7 +41,8 @@ const
     // mode: 'production',
     entry: {
       script: [
-        `${paths.src + paths.js}script.js`,
+        // `${paths.src + paths.js}script.js`,
+        `${paths.src + paths.ts}script.ts`,
         `${paths.src + paths.scss}style.scss`
       ]
     },
@@ -161,6 +163,17 @@ const
           exclude: /node_modules\/(?!(micromodal|dom7|ssr-window|swiper)\/).*/,
         },
 
+        // ts
+        {
+          test: /\.ts$/,
+          use: [
+            {
+              loader: 'ts-loader',
+            }
+          ],
+          exclude: /node_modules\/(?!(micromodal|dom7|ssr-window|swiper)\/).*/,
+        },
+
         // img
         {
           test: /\.(jpe?g|png|gif|svg|ico)(\?.+)?$/,
@@ -175,6 +188,10 @@ const
           ]
         },
       ]
+    },
+
+    resolve: {
+      extensions: ['.ts', '.js']
     },
 
     plugins: [

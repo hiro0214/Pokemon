@@ -31,6 +31,8 @@
     "smoothscroll-polyfill": "^0.4.4",
     "swiper": "^5.2.1",
     "terser-webpack-plugin": "^2.3.2",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.5",
     "url-loader": "^2.1.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",

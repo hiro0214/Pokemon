@@ -28,7 +28,7 @@
     "power": 40,
     "accuracy": 90,
     "type": "ノーマル",
-    "effect": "マヒ",
+    "effect": null,
     "category": "物理"
   },
   {
