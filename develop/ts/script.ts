@@ -1,11 +1,9 @@
-const pokemonData = require('../json/data.json');
-const trickData = require('../json/trick.json');
-
-import { textWindow } from './_text';
-import { btnClick, keyAction} from './_btn';
 import * as frame from './_frame';
-import { Member, Pokemonable, Trickable } from './_interface';
-import { Pokemon } from './_pokemon';
+import { textWindow } from './_text';
+import { btnClick, keyAction } from './_btn';
+import { Member } from './_interface';
+import { _p_minHp, _e_minHp, $p_minHpArea,  generateStar, generatePoke, insertElement} from './_element';
+import { commandIn, commandOut, textWindowIn, textWindowOut } from './_window';
 
 document.addEventListener('DOMContentLoaded', () => {
   changeURL();
@@ -22,25 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
   Global Variable
 =========================== */
 
-
 type GameState = 'opening' | 'title' | 'field' | 'battleBefore' | 'battleProcess' | 'battleAfter';
 
-let
+export let
   gameState: GameState = 'battleBefore',
 
   screen: HTMLDivElement,
-  playerArea: HTMLDivElement,
-  enemyArea: HTMLDivElement,
-  trickColumn: HTMLDivElement,
 
   $p_p, // Player's current Pokemon alias.
   $e_p, // Enemy's current Pokemon alias.
 
   $p_minHp: number,
-  $p_maxHp: number,
-
   $e_minHp: number,
-  $e_maxHp: number,
 
   player: Member = {
     name: 'サトシ',
@@ -61,13 +52,14 @@ const
     screen = <HTMLDivElement>document.getElementById('screen')
   },
 
-  battleVariable = () => {
-    playerArea = <HTMLDivElement>document.getElementById('player')
-    enemyArea = <HTMLDivElement>document.getElementById('enemy')
-    trickColumn = <HTMLDivElement>document.getElementById('trickColumn')
-
+  battleAlias = () => {
     $p_p = player.pokemon[player.current];
     $e_p = enemy.pokemon[enemy.current];
+  },
+
+  battleVariable = () => {
+    $p_minHp = _p_minHp;
+    $e_minHp = _e_minHp;
   };
 
 
@@ -77,84 +69,38 @@ const
 =========================== */
 
 const
-  setAttr = (tar: string, attr: string, value: string) => document.getElementById(tar).setAttribute(attr, value),
-  addClass = (tar: string, className: string) => document.getElementById(tar).classList.add(className),
-  removeClass = (tar: string, className: string) => document.getElementById(tar).classList.remove(className),
-
-  generateStar = (color: string, i, left: number): HTMLDivElement => {
-    const ele = document.createElement('div')
-    ele.classList.add('star')
-    ele.style.borderBottom = `10px solid ${color}`;
-    ele.style.left = `${left + (i * 70)}px`
-    return ele;
-  },
-
-  getTrick = (id: number): Trickable => trickData[id],
-  generatePoke = (id: number) => {
-    let
-      trickEle: Trickable[] = [],
-      poke: Pokemonable = pokemonData[id];
-
-    poke.tricks.forEach((i) => {
-      trickEle.push(getTrick(i));
-    })
-    poke.tricks = trickEle;
-    return new Pokemon(poke.name, poke.text, poke.hp, poke.attack, poke.defense, poke.speed, poke.spAtk, poke.spDef, poke.type1, poke.type2, poke.tricks)
-  },
-
-  generateImg = (name: string, text: string): HTMLImageElement => {
+  meterAnimate = (tar: 'player' | 'enemy', damage: number) => {
     const
-      img = document.createElement('img'),
-      path = './assets/images/';
+      meter: HTMLMeterElement = document.querySelector(`#${tar} meter`),
+      after: number = meter.value - damage;
 
-    if (name == 'player') {
-      img.src = `${path + text}_b.png`
-      return img;
-    }
-    else if (name == 'enemy') {
-      img.src = `${path + text}_f.png`
-      return img;
-    }
-  },
+    return new Promise((res) => {
+      (function damageStep() {
+        if (meter.value <= after) {
+          res()
+          return;
+        }
+        setTimeout(() => {
+          meter.value -= 1
+          if (tar == 'player') {
+            $p_minHp -= 1
+            $p_minHpArea.textContent = String(meter.value)
+          }
+          else if (tar = 'enemy') {
+            $e_minHp -= 1
+          }
 
-
-  insertElement = () => {
-    playerArea.children[0].textContent = $p_p.name
-    enemyArea.children[0].textContent = $e_p.name
-
-    playerArea.children[1].appendChild(generateImg('player', $p_p.text))
-    enemyArea.children[1].appendChild(generateImg('enemy', $e_p.text))
-
-    $p_minHp = $p_p.hp
-    $p_maxHp = $p_p.hp
-
-    $e_minHp = $e_p.hp
-    $e_maxHp = $e_p.hp
-
-    playerArea.children[3].children[0].textContent = String($p_minHp)
-    playerArea.children[3].children[1].textContent = String($p_maxHp)
-
-    $p_p.tricks.forEach(ele => {
-      const trickContent = document.createElement('li')
-      trickContent.textContent = ele.name
-      trickColumn.appendChild(trickContent)
+          if (meter.value <= 0) {
+            res()
+            return;
+          }
+          else {
+            damageStep()
+          }
+        }, 25);
+      }())
     })
   },
-
-  commandIn = () => {
-    addClass('trickColumn', 'show')
-    trickColumn.children[0].classList.add('current')
-  },
-  commandOut = (i: string) => {
-    removeClass('trickColumn', 'show')
-    trickColumn.children[i].classList.remove('current')
-  },
-
-  textWindowIn = (i: string) => {
-    addClass('textBox', 'show')
-    textWindow(`${$p_p.name}の\n${$p_p.tricks[i].name}!`)
-  },
-  textWindowOut = () => removeClass('textBox', 'show'),
 
   bgmLoop = () => {
     const bgm = new Audio('../audio/battle_loop.mp3')
@@ -256,19 +202,21 @@ const field = () => {
 };
 
 const battleBefore = () => {
-  player.pokemon.push(generatePoke(2))
+  player.pokemon.push(generatePoke(1))
   console.log(player.pokemon);
-  enemy.pokemon.push(generatePoke(1))
+  enemy.pokemon.push(generatePoke(2))
   console.log(enemy.pokemon);
 
   screen.innerHTML = frame.battleFrame
-  battleVariable()
+  battleAlias()
 
   console.log(`${enemy.name}が\nしょうぶを　しかけてきた！`);
   console.log(`${player.name}は\n${$p_p.name}を　くりだした！`);
   console.log(`${enemy.name}は\n${$e_p.name}を　くりだした！`);
 
   insertElement()
+  battleVariable()
+
   changeState('battleProcess');
 };
 
@@ -279,21 +227,25 @@ export const battleProcess = (trickIndex?: string) => {
   }
 
   commandOut(trickIndex)
-  textWindowIn(trickIndex)
+  textWindowIn()
+  textWindow(`${$p_p.name}の\n${$p_p.tricks[trickIndex].name}!`)
 
   // ダメージ処理
   // pokemon.attack()
 
-  if ($e_minHp <= 0 || $p_minHp <= 0) {
-    setTimeout(() => {
-      gameFinish();
-    }, 2500);
-  } else {
-    setTimeout(() => {
-      commandIn()
-      textWindowOut()
-    }, 2500);
-  }
+  meterAnimate('player', 90)
+  .then(() => {
+    if ($e_minHp <= 0 || $p_minHp <= 0) {
+      setTimeout(() => {
+        gameFinish();
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        commandIn()
+        textWindowOut()
+      }, 1500);
+    }
+  })
 };
 
 const gameFinish = () => {

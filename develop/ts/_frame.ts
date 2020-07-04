@@ -51,7 +51,7 @@ export const battleFrame =
     <div class='pokemon-content__name'></div>
     <div class='pokemon-content__img'></div>
     <div class='pokemon-content__lv'>50</div>
-    <div class='pokemon-content__gauge'></div>
+    <meter class='pokemon-content__meter' value='' low='' max='' optimum=''></meter>
   </div>
 </div>
 
@@ -68,9 +68,10 @@ export const battleFrame =
     <div class='pokemon-content__name'></div>
     <div class='pokemon-content__img'></div>
     <div class='pokemon-content__lv'>50</div>
-    <div class='pokemon-content__gauge'>
-      <div class='pokemon-content__gauge--min'></div>
-      <div class='pokemon-content__gauge--max'></div>
+    <meter class='pokemon-content__meter' value='' low='' max='' optimum=''></meter>
+    <div class='pokemon-content__hp'>
+      <div class='pokemon-content__minHp'></div>
+      <div class='pokemon-content__maxHp'></div>
     </div>
   </div>
 </div>
