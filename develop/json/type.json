@@ -1,0 +1,91 @@
+{
+  "normal": {
+    "great": [],
+    "onemore": ["rock"],
+    "nodamage": ["ghost"]
+  },
+
+  "fire": {
+    "great": ["grass", "ice", "bug"],
+    "onemore": ["fire", "water", "rock", "dragon"],
+    "nodamage": []
+  },
+
+  "water": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  },
+
+  "grass": {
+    "great": ["water", "ground", "rock"],
+    "onemore": ["fire", "grass", "poison", "flying", "bug", "dragon"],
+    "nodamage": []
+  },
+
+  "electric": {
+    "great": ["water", "flying"],
+    "onemore": ["electric", "grass", "dragon"],
+    "nodamage": ["ground"]
+  },
+
+  "ice": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  },
+
+  "fighting": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  },
+
+  "poison": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  },
+
+  "ground": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  },
+
+  "flying": {
+    "great": ["fighting", "bug"],
+    "onemore": ["flying"],
+    "nodamage": []
+  },
+
+  "psychic": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  },
+
+  "bug": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  },
+
+  "rock": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  },
+
+  "ghost": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  },
+
+  "dragon": {
+    "great": [],
+    "onemore": [],
+    "nodamage": []
+  }
+}

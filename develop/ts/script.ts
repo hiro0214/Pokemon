@@ -1,9 +1,10 @@
 import * as frame from './_frame';
 import { textWindow } from './_text';
 import { btnClick, keyAction } from './_btn';
-import { Member } from './_interface';
-import { _p_minHp, _e_minHp, $p_minHpArea,  generateStar, generatePoke, insertElement} from './_element';
+import { MemberObj } from './_interface';
+import { _p_minHp, _e_minHp, $p_minHpArea, generateStar, generatePoke, insertElement, damageHit } from './_element';
 import { commandIn, commandOut, textWindowIn, textWindowOut } from './_window';
+import { randomInt } from './_utility';
 
 document.addEventListener('DOMContentLoaded', () => {
   changeURL();
@@ -20,7 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
   Global Variable
 =========================== */
 
-type GameState = 'opening' | 'title' | 'field' | 'battleBefore' | 'battleProcess' | 'battleAfter';
+type GameState =
+  | 'opening'
+  | 'title'
+  | 'field'
+  | 'battleBefore'
+  | 'battleFlow'
+  | 'battleAfter'
+
+type Member = 'player' | 'enemy';
 
 export let
   gameState: GameState = 'battleBefore',
@@ -33,18 +42,20 @@ export let
   $p_minHp: number,
   $e_minHp: number,
 
-  player: Member = {
+  firstAttack: Member,
+  secondAttack: Member,
+
+  player: MemberObj = {
     name: 'サトシ',
     pokemon: [],
     current: 0
   },
 
-  enemy: Member = {
+  enemy: MemberObj = {
     name: 'タケシ',
     pokemon: [],
     current: 0
   };
-
 
 
 const
@@ -69,7 +80,7 @@ const
 =========================== */
 
 const
-  meterAnimate = (tar: 'player' | 'enemy', damage: number) => {
+  meterAnimate = (tar: Member, damage: number) => {
     const
       meter: HTMLMeterElement = document.querySelector(`#${tar} meter`),
       after: number = meter.value - damage;
@@ -97,9 +108,60 @@ const
           else {
             damageStep()
           }
-        }, 25);
+        }, 45);
       }())
     })
+  },
+
+  trickCompatibilityText = (num: number) => {
+    return new Promise((res) => {
+      if (num == 0) {
+        textWindow('こうかが ないみたいだ')
+      }
+      else if (num < 1) {
+        textWindow('こうかは いまひとつの ようだ')
+      }
+      else if (num > 1) {
+        textWindow('こうかは ばつぐんだ!')
+      }
+      setTimeout(() => {
+        res()
+      }, 2500);
+    })
+  },
+
+  criticalHitText = () => {
+    return new Promise((res) => {
+      textWindow('きゅうしょに あたった!')
+      setTimeout(() => {
+        res()
+      }, 2500);
+    })
+  },
+
+  speedCheck = (p_s: number, e_s: number) => {
+    if (p_s >= e_s) {
+      firstAttack = 'player'
+      secondAttack = 'enemy'
+    }
+    else if (p_s <= e_s) {
+      firstAttack = 'enemy'
+      secondAttack = 'player'
+    }
+  },
+
+  hpCheck = (target_p) => {
+    if ($p_minHp <= 0 ) {
+      textWindow(`${target_p.name}は たおれた!`)
+      return false
+    }
+    else if ($e_minHp <= 0) {
+      textWindow(`てきの ${target_p.name}は たおれた!`)
+      return false
+    }
+    else {
+      return true
+    }
   },
 
   bgmLoop = () => {
@@ -138,7 +200,7 @@ const conditionalBranch = () => {
     case 'title': title(); break;
     case 'field': field(); break;
     case 'battleBefore': battleBefore(); break;
-    case 'battleProcess': battleProcess(); break;
+    case 'battleFlow': battleFlow(); break;
     case 'battleAfter': battleAfter(); break;
   }
 };
@@ -202,7 +264,7 @@ const field = () => {
 };
 
 const battleBefore = () => {
-  player.pokemon.push(generatePoke(1))
+  player.pokemon.push(generatePoke(0))
   console.log(player.pokemon);
   enemy.pokemon.push(generatePoke(2))
   console.log(enemy.pokemon);
@@ -210,47 +272,108 @@ const battleBefore = () => {
   screen.innerHTML = frame.battleFrame
   battleAlias()
 
-  console.log(`${enemy.name}が\nしょうぶを　しかけてきた！`);
-  console.log(`${player.name}は\n${$p_p.name}を　くりだした！`);
-  console.log(`${enemy.name}は\n${$e_p.name}を　くりだした！`);
+  console.log(`${enemy.name}が\nしょうぶを しかけてきた！`);
+  console.log(`${player.name}は\n${$p_p.name}を くりだした！`);
+  console.log(`${enemy.name}は\n${$e_p.name}を くりだした！`);
 
   insertElement()
   battleVariable()
 
-  changeState('battleProcess');
+  changeState('battleFlow');
 };
 
-export const battleProcess = (trickIndex?: string) => {
-  if (!trickIndex) {
-    commandIn()
-    return;
+const battleProcess = (member: Member, trickIndex?) => {
+  let
+    actor_p,
+    target_p,
+    target: Member = member == 'player' ? 'enemy' : 'player';
+
+  if (target == 'player') {
+    actor_p = $e_p
+    target_p = $p_p
   }
+  else if (target == 'enemy') {
+    actor_p = $p_p
+    target_p = $e_p
+  }
+
+  if (!trickIndex) trickIndex = randomInt(3)
+
+  target == 'enemy' ?
+    textWindow(`${actor_p.name}の\n${actor_p.tricks[trickIndex].name}!`):
+    textWindow(`てきの ${actor_p.name}の\n${actor_p.tricks[trickIndex].name}!`);
+
+  return new Promise((res, rej) => {
+    actor_p.behaivor(actor_p, target_p, actor_p.tricks[trickIndex])
+
+    .then((result) => {
+      const
+        damage = result[0],
+        magnification = result[1],
+        critical = result[2];
+      damageHit(target)
+        .then(() => {
+          return meterAnimate(target, damage)
+        })
+        .then(() => {
+          if (magnification != 1) return trickCompatibilityText(magnification)
+        })
+        .then(() => {
+          if (critical == 1.5) return criticalHitText()
+        })
+        .then(() => {
+          hpCheck(target_p) ?
+            res():
+            setTimeout(() => {
+              rej()
+            }, 2500);
+        })
+    })
+
+    .catch(() => {
+      textWindow(`しかし ${actor_p.name}の\nこうげきは はずれた!`)
+      setTimeout(() => {
+        res()
+      }, 2500);
+    })
+  })
+}
+
+export const battleFlow = (trickIndex?: string) => {
+  if (!trickIndex) return commandIn();
 
   commandOut(trickIndex)
   textWindowIn()
-  textWindow(`${$p_p.name}の\n${$p_p.tricks[trickIndex].name}!`)
 
-  // ダメージ処理
-  // pokemon.attack()
+  speedCheck($p_p.speed, $e_p.speed)
 
-  meterAnimate('player', 90)
-  .then(() => {
-    if ($e_minHp <= 0 || $p_minHp <= 0) {
-      setTimeout(() => {
-        gameFinish();
-      }, 1500);
-    } else {
-      setTimeout(() => {
-        commandIn()
-        textWindowOut()
-      }, 1500);
-    }
-  })
+  const
+    fa = firstAttack == 'player' ?
+      () => battleProcess(firstAttack, trickIndex):
+      () => battleProcess(firstAttack),
+    sa = secondAttack == 'player' ?
+      () => battleProcess(secondAttack, trickIndex):
+      () => battleProcess(secondAttack);
+
+  fa()
+    .then(() => {
+      sa()
+        .then(() => {
+          commandIn()
+          textWindowOut()
+        })
+        .catch(() => {
+          gameFinish()
+        })
+    })
+    .catch(() => {
+      gameFinish()
+    })
 };
 
 const gameFinish = () => {
   if ($e_minHp <= 0) {
-    textWindow(`${enemy.name}との\nしょうぶに　かった!`);
+    textWindow(`${enemy.name}との\nしょうぶに かった!`);
   }
   else if ($p_minHp <= 0) {
     textWindow(`${player.name}は\nまけてしまった`);

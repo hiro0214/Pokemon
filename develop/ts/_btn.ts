@@ -1,4 +1,4 @@
-import { battleProcess } from './script';
+import { battleFlow } from './script';
 
 export const btnClick = () => {
   document.querySelector('.gameboy__key--up').addEventListener('click', btnUpAction)
@@ -65,7 +65,7 @@ const btnAAction = () => {
 
   // 技リストを決定する時のみのAボタンアクションのif文を後々追加
   const i = String(Array.prototype.indexOf.call(current.parentNode.querySelectorAll('li'), current))
-  battleProcess(i)
+  battleFlow(i)
 }
 
 const btnBAction = () => {

@@ -3,96 +3,96 @@
     "name": "かみなり",
     "power": 120,
     "accuracy": 70,
-    "type": "でんき",
+    "type": "electric",
     "effect": "マヒ",
-    "category": "特殊"
+    "category": "special"
   },
   {
     "name": "10まんボルト",
     "power": 95,
     "accuracy": 100,
-    "type": "でんき",
+    "type": "electric",
     "effect": "マヒ",
-    "category": "特殊"
+    "category": "special"
   },
   {
     "name": "スピードスター",
     "power": 60,
     "accuracy": 100,
-    "type": "ノーマル",
+    "type": "normal",
     "effect": null,
-    "category": "物理"
+    "category": "physics"
   },
   {
     "name": "でんこうせっか",
     "power": 40,
     "accuracy": 90,
-    "type": "ノーマル",
+    "type": "normal",
     "effect": null,
-    "category": "物理"
+    "category": "physics"
   },
   {
     "name": "ソーラービーム",
     "power": 120,
     "accuracy": 100,
-    "type": "くさ",
+    "type": "grass",
     "effect": "2ターン",
-    "category": "特殊"
+    "category": "special"
   },
   {
     "name": "メガドレイン",
     "power": 40,
     "accuracy": 100,
-    "type": "くさ",
+    "type": "grass",
     "effect": "吸収",
-    "category": "特殊"
+    "category": "special"
   },
   {
     "name": "はっぱカッター",
     "power": 55,
     "accuracy": 95,
-    "type": "くさ",
+    "type": "grass",
     "effect": null,
-    "category": "特殊"
+    "category": "special"
   },
   {
     "name": "のしかかり",
     "power": 85,
     "accuracy": 100,
-    "type": "ノーマル",
+    "type": "normal",
     "effect": "マヒ",
-    "category": "物理"
+    "category": "physics"
   },
   {
     "name": "だいもんじ",
     "power": 120,
     "accuracy": 85,
-    "type": "ほのお",
+    "type": "fire",
     "effect": "やけど",
-    "category": "特殊"
+    "category": "special"
   },
   {
     "name": "かえんほうしゃ",
     "power": 95,
     "accuracy": 100,
-    "type": "ほのお",
+    "type": "fire",
     "effect": "やけど",
-    "category": "特殊"
+    "category": "special"
   },
   {
     "name": "きりさく",
     "power": 70,
     "accuracy": 100,
-    "type": "ノーマル",
+    "type": "normal",
     "effect": null,
-    "category": "物理"
+    "category": "physics"
   },
   {
     "name": "つばさでうつ",
     "power": 35,
     "accuracy": 100,
-    "type": "ひこう",
+    "type": "flying",
     "effect": null,
-    "category": "物理"
+    "category": "physics"
   }
 ]

@@ -20,7 +20,7 @@ export const textWindow = (text: string) => {
     }
     document.getElementById('textBox').innerHTML += c;
     msg_buff = msg_buff.slice(1);
-    setTimeout(() => message_char(), 45);
+    setTimeout(() => message_char(), 35);
   }
 
   document.getElementById('textBox').innerHTML = ''

@@ -110,8 +110,12 @@
   &__img {
     position: absolute;
     width: 180px;
+    animation-duration: .4s;
     img {
       width: 100%;
+    }
+    &.animated {
+      animation-name: damageHit;
     }
   }
   &__lv {

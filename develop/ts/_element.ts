@@ -1,4 +1,3 @@
-const pokemonData = require('../json/data.json');
 const trickData = require('../json/trick.json');
 
 import * as v from './script';
@@ -7,6 +6,8 @@ import { multipleSetAttr} from './_utility';
 import { Pokemon } from './_pokemon';
 
 export let
+  playerArea: HTMLDivElement,
+  enemyArea: HTMLDivElement,
   trickColumn: HTMLDivElement,
 
   _p_minHp: number,
@@ -23,10 +24,6 @@ export const generateStar = (color: string, i, left: number): HTMLDivElement => 
   ele.style.borderBottom = `10px solid ${color}`;
   ele.style.left = `${left + (i * 70)}px`
   return ele;
-}
-
-const getTrick = (id: number): Trickable => {
-  return trickData[id]
 }
 
 const generateImg = (name: string, text: string): HTMLImageElement => {
@@ -73,9 +70,8 @@ const generateMeter = (tar: string, hp: number) => {
 }
 
 export const insertElement = () => {
-  const
-    playerArea = <HTMLDivElement>document.getElementById('player'),
-    enemyArea = <HTMLDivElement>document.getElementById('enemy');
+  playerArea = <HTMLDivElement>document.getElementById('player'),
+  enemyArea = <HTMLDivElement>document.getElementById('enemy');
   trickColumn = <HTMLDivElement>document.getElementById('trickColumn')
 
   playerArea.children[0].textContent = v.$p_p.name
@@ -94,14 +90,25 @@ export const insertElement = () => {
   })
 }
 
-export const generatePoke = (id: number) => {
-  let
-    trickEle: Trickable[] = [],
-    poke: Pokemonable = pokemonData[id];
+const getTrick = (id): Trickable => {
+  return trickData[id]
+}
 
-  poke.tricks.forEach((i) => {
-    trickEle.push(getTrick(i));
+export const generatePoke = (id: number) => {
+  let poke: Pokemonable = JSON.parse(JSON.stringify(require('../json/data.json')[id]));
+  poke.tricks.forEach((id, i) => {
+    poke.tricks[i] = getTrick(id)
   })
-  poke.tricks = trickEle;
   return new Pokemon(poke.name, poke.text, poke.hp, poke.attack, poke.defense, poke.speed, poke.spAtk, poke.spDef, poke.type1, poke.type2, poke.tricks)
+}
+
+export const damageHit = (member: 'player' | 'enemy') => {
+  const target = <HTMLDivElement>document.querySelector(`#${member} .pokemon-content__img`)
+  return new Promise((res) => {
+    target.classList.add('animated')
+    setTimeout(() => {
+      target.classList.remove('animated')
+      res()
+    }, 400);
+  })
 }

@@ -15,3 +15,7 @@ export const addClass = (tar: string, className: string) => {
 export const removeClass = (tar: string, className: string) => {
   document.getElementById(tar).classList.remove(className)
 }
+
+export const randomInt = (range: number): number => {
+  return Math.floor(Math.random() * (range + 1));
+}

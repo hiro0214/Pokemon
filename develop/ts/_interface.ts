@@ -1,4 +1,4 @@
-export interface Member {
+export interface MemberObj {
   name: string;
   pokemon: Pokemonable[];
   current: number; // 何番目のポケモンを選択しているかのindex。ポケモンを複数所持できるようになった時に使用する。
@@ -15,7 +15,7 @@ export interface Pokemonable {
   spDef: number;
   readonly type1: string;
   readonly type2: string;
-  tricks: number[] | Trickable[];
+  tricks: Trickable[];
 }
 
 export interface Trickable {
